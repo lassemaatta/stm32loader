@@ -6,7 +6,7 @@ if [[ $# -eq 0 ]]; then
 fi
 
 if [[ -f $1 ]]; then
-    ./stm32loader.py -e -w -v $1
+    sudo ./stm32loader.py -e -w -v $1
 else
     echo "$1 is not a file, exiting!"
     exit 1
