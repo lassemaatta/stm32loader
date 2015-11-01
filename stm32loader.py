@@ -375,7 +375,7 @@ class CommandInterface:
 
 
 def usage():
-    print """Usage: %s [-hqVewvr] [-l length] [-p port] [-b baud] [-a addr] [-g addr] [file.bin]
+    print """Usage: %s [-hqVewvr] [-l length] [-p port] [-b baud] [-a addr] [-g addr] [-n pin] [-m pin] [file.bin]
     -h          This help
     -q          Quiet
     -V          Verbose
@@ -388,6 +388,8 @@ def usage():
     -b baud     Baud speed (default: 115200)
     -a addr     Target address
     -g addr     Address to start running at (0x08000000, usually)
+    -n pin      Pin number for reset (default: 18)
+    -m pin      Pin number for boot0 (default: 23)
 
     ./stm32loader.py -e -w -v example/main.bin
 
@@ -418,7 +420,7 @@ if __name__ == "__main__":
 # http://www.python.org/doc/2.5.2/lib/module-getopt.html
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hqVewvrs:p:b:a:l:g:")
+        opts, args = getopt.getopt(sys.argv[1:], "hqVewvrs:p:b:a:l:g:n:m:")
     except getopt.GetoptError, err:
         # print help information and exit:
         print str(err) # will print something like "option -a not recognized"
@@ -455,6 +457,10 @@ if __name__ == "__main__":
             conf['go_addr'] = eval(a)
         elif o == '-l':
             conf['len'] = eval(a)
+        elif o == '-n':
+            conf['pin_reset'] = eval(a)
+        elif o == '-m':
+            conf['pin_boot0'] = eval(a)
         else:
             assert False, "unhandled option"
 
@@ -520,6 +526,12 @@ if __name__ == "__main__":
 
         if conf['go_addr'] != -1:
             cmd.cmdGo(conf['go_addr'])
+
+        if conf['pin_reset']:
+            pin_reset = conf['pin_reset']
+
+        if conf['pin_boot0']:
+            pin_reset = conf['pin_boot0']
 
     finally:
         cmd.releaseChip()

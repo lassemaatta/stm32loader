@@ -6,7 +6,7 @@ Python script which will talk to the STM32 bootloader to upload and download fir
 Original Version by: Ivan A-R <ivan@tuxotronic.org>
 
 
-Usage: ./stm32loader.py [-hqVewvr] [-l length] [-p port] [-b baud] [-a addr] [file.bin]
+Usage: ./stm32loader.py [-hqVewvr] [-l length] [-p port] [-b baud] [-a addr] [-n pin] [-m pin] [file.bin]
     -h          This help
     -q          Quiet
     -V          Verbose
@@ -18,6 +18,8 @@ Usage: ./stm32loader.py [-hqVewvr] [-l length] [-p port] [-b baud] [-a addr] [fi
     -p port     Serial port (default: /dev/ttyAMA0)
     -b baud     Baud speed (default: 115200)
     -a addr     Target address
+    -n pin      Pin number for reset (default: 18)
+    -m pin      Pin number for boot0 (default: 23)
 
     ./stm32loader.py -e -w -v example/main.bin
 
