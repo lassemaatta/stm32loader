@@ -35,6 +35,10 @@ except:
 # Verbose level
 QUIET = 20
 
+# pin numbers
+pin_boot0 = 23
+pin_reset = 18
+
 # these come from AN2606
 chip_ids = {
     0x412: "STM32 Low-density",
@@ -108,14 +112,14 @@ class CommandInterface:
         dir_fd.close()
 
     def reset(self):
-        self.setPin(18, 0)
+        self.setPin(pin_reset, 0)
         time.sleep(0.1)
-        self.setPin(18, 1)
+        self.setPin(pin_reset, 1)
         time.sleep(0.5)
 
     def initChip(self):
         # Set boot
-        self.setPin(23, 1)
+        self.setPin(pin_boot0, 1)
         self.reset()
         self.sp.flushInput()
         self.sp.flushOutput()
@@ -124,7 +128,7 @@ class CommandInterface:
         return self._wait_for_ask("Syncro")
 
     def releaseChip(self):
-        self.setPin(23,0)
+        self.setPin(pin_boot0,0)
         self.reset()
 
     def cmdGeneric(self, cmd):
