@@ -112,9 +112,9 @@ class CommandInterface:
         dir_fd.close()
 
     def reset(self):
-        self.setPin(pin_reset, 0)
+        self.setPin(conf['pin_reset'], 0)
         time.sleep(0.1)
-        self.setPin(pin_reset, 1)
+        self.setPin(conf['pin_reset'], 1)
         time.sleep(0.5)
 
     def initChip(self):
