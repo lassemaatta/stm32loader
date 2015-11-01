@@ -59,7 +59,7 @@ class CmdException(Exception):
 class CommandInterface:
     extended_erase = 0
 
-    def open(self, aport='/dev/tty.usbserial-ftCYPMYJ', abaudrate=115200) :
+    def open(self, aport='/dev/ttyAMA0', abaudrate=115200) :
         self.sp = serial.Serial(
             port=aport,
             baudrate=abaudrate,     # baudrate
@@ -380,7 +380,7 @@ def usage():
     -v          Verify
     -r          Read
     -l length   Length of read
-    -p port     Serial port (default: /dev/tty.usbserial-ftCYPMYJ)
+    -p port     Serial port (default: /dev/ttyAMA0)
     -b baud     Baud speed (default: 115200)
     -a addr     Target address
     -g addr     Address to start running at (0x08000000, usually)
@@ -401,7 +401,7 @@ if __name__ == "__main__":
         pass
 
     conf = {
-            'port': '/dev/tty.usbserial-ftCYPMYJ',
+            'port': '/dev/ttyAMA0',
             'baud': 115200,
             'address': 0x08000000,
             'erase': 0,
