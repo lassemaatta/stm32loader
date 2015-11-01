@@ -415,6 +415,8 @@ if __name__ == "__main__":
             'verify': 0,
             'read': 0,
             'go_addr':-1,
+            'pin_reset': 18,
+            'pin_boot0': 23
         }
 
 # http://www.python.org/doc/2.5.2/lib/module-getopt.html
