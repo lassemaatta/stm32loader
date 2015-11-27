@@ -91,21 +91,9 @@ class CommandInterface:
                     raise CmdException("Unknown response. "+info+": "+hex(ask))
 
     def setPin(self, pin, value):
-        try:
-            exp_fd = open("/sys/class/gpio/export", "w")
-            exp_fd.write(str(pin))
-            exp_fd.close()
-        except IOError:
-            pass
-            #print "Pin",pin," already exported"
-
-        dir_fd = open("/sys/class/gpio/gpio"+str(pin)+"/direction","w")
-        dir_fd.write("out")
-        dir_fd.close()
-
-        val_fd = open("/sys/class/gpio/gpio"+str(pin)+"/value","w")
+        val_fd = open("/sys/class/gpio_sw/"+pin+"/data","w")
         val_fd.write(str(value))
-        dir_fd.close()
+        val_fd.close()
 
     def reset(self):
         self.setPin(conf['pin_reset'], 0)
@@ -403,7 +391,7 @@ if __name__ == "__main__":
         pass
 
     conf = {
-            'port': '/dev/ttyAMA0',
+            'port': '/dev/ttyS3',
             'baud': 115200,
             'address': 0x08000000,
             'erase': 0,
@@ -411,8 +399,8 @@ if __name__ == "__main__":
             'verify': 0,
             'read': 0,
             'go_addr':-1,
-            'pin_reset': 18,
-            'pin_boot0': 23
+            'pin_reset': 'PA8',
+            'pin_boot0': 'PA7'
         }
 
 # http://www.python.org/doc/2.5.2/lib/module-getopt.html
@@ -527,4 +515,3 @@ if __name__ == "__main__":
 
     finally:
         cmd.releaseChip()
-
