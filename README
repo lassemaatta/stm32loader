@@ -1,10 +1,10 @@
 STM32Loader
 ===========
 
-Python script for the Raspberry Pi or similar boards which will talk to the STM32 bootloader to upload and download firmware.
+Python script for the Orange Pi 2 or similar boards which will talk to the STM32 bootloader to upload and download firmware.
 Original Version by: Ivan A-R <ivan@tuxotronic.org>
 Forked from: https://github.com/3drobotics/stm32loader
-Modified to allow for arguments to set pin numbers for reset and boot0. Added easy to use shellscript to be used for flashing the microcontroller on the Hedgehog Light Educational Robotics Controller (https://pria.at/research/#andrix).
+Modified for use on Orange Pi 2. Modified to allow for arguments to set pin numbers for reset and boot0. Added easy to use shellscript to be used for flashing the microcontroller on the Hedgehog Light Educational Robotics Controller (https://pria.at/research/#andrix).
 
 
 Simple usage (use this for Hedgehog): ./flash.sh somefile.bin
