@@ -91,7 +91,7 @@ class CommandInterface:
                     raise CmdException("Unknown response. "+info+": "+hex(ask))
 
     def setPin(self, pin, value):
-        val_fd = open("/sys/class/gpio_sw/"+pin+"/data","w")
+        val_fd = open(pin,"w")
         val_fd.write(str(value))
         val_fd.close()
 
@@ -372,8 +372,8 @@ def usage():
     -b baud     Baud speed (default: 115200)
     -a addr     Target address
     -g addr     Address to start running at (0x08000000, usually)
-    -n pin      Pin number for reset (default: 18)
-    -m pin      Pin number for boot0 (default: 23)
+    -n pin      Pin file name for reset (default: /sys/class/gpio_sw/PA8/data)
+    -m pin      Pin file name for boot0 (default: /sys/class/gpio_sw/PA7/data)
 
     ./stm32loader.py -e -w -v example/main.bin
 
@@ -444,9 +444,9 @@ if __name__ == "__main__":
         elif o == '-l':
             conf['len'] = eval(a)
         elif o == '-n':
-            conf['pin_reset'] = eval(a)
+            conf['pin_reset'] = a
         elif o == '-m':
-            conf['pin_boot0'] = eval(a)
+            conf['pin_boot0'] = a
         else:
             assert False, "unhandled option"
 
