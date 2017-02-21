@@ -56,6 +56,11 @@ def mdebug(level, message):
 class CmdException(Exception):
     pass
 
+
+class VerifyException(Exception):
+    pass
+
+
 class CommandInterface:
     extended_erase = 0
 
@@ -505,6 +510,7 @@ if __name__ == "__main__":
                 for i in xrange(0, imax):
                     if data[i] != verify[i]:
                         print hex(i) + ': ' + hex(data[i]) + ' vs ' + hex(verify[i])
+                raise VerifyException("Verification FAILED")
 
         if not conf['write'] and conf['read']:
             rdata = cmd.readMemory(conf['address'], conf['len'])
